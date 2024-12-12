@@ -28,6 +28,7 @@ func main() {
 
 	validReports := 0
 	var validator func([]int, bool) bool
+	// get the valid reports
 	for _, report := range reports {
 		if d := report[0] - report[len(report)-1]; d > 0 {
 			validator = validateDecreasingReport
@@ -41,6 +42,7 @@ func main() {
 	fmt.Printf("valid reports %d\n", validReports)
 
 	validReports = 0
+	// chech for valid after removing up to one number
 	for _, report := range reports {
 		if d := report[0] - report[len(report)-1]; d > 0 {
 			validator = validateDecreasingReport
@@ -72,6 +74,8 @@ func atoi(str string) int {
 	return n
 }
 
+// validate an increasing report
+// if you want to remove a number, remove the number
 func validateIncreasingReport(nums []int, allowRemoval bool) bool {
 	for i := 1; i < len(nums); i++ {
 		diff := nums[i] - nums[i-1]
@@ -94,6 +98,8 @@ func validateIncreasingReport(nums []int, allowRemoval bool) bool {
 	return true
 }
 
+// validate an decreasing report
+// if you want to remove a number, remove the number
 func validateDecreasingReport(nums []int, allowRemoval bool) bool {
 	for i := 1; i < len(nums); i++ {
 		diff := nums[i-1] - nums[i]

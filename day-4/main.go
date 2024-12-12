@@ -36,6 +36,7 @@ func main() {
 
 	grid := makeGrid()
 	num := 0
+	// look for X and then does it form the XMAS
 	for r, row := range grid {
 		for c, b := range row {
 			if b != 'X' {
@@ -51,6 +52,7 @@ func main() {
 	fmt.Printf("Number of XMAS: %d\n", num)
 
 	num = 0
+	// look for an A and then does it create X MAS
 	for r, row := range grid {
 		for c, b := range row {
 			if b != 'A' {

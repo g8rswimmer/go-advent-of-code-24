@@ -12,13 +12,16 @@ func (p *parser) Next() (int, int, bool) {
 	if !p.nextInstruction() {
 		return -1, -1, false
 	}
+	// check to make sure there is an instruction
 	if string(p.mem[p.idx:p.idx+4]) != "mul(" {
 		p.idx++
 		return p.Next()
 	}
+	// move to the number
 	p.idx += 4
 	end := p.idx
 	hasComma := false
+	// get the end and make sure there is a comma
 	for end < len(p.mem) {
 		if p.mem[end] == ')' {
 			break
@@ -35,11 +38,13 @@ func (p *parser) Next() (int, int, bool) {
 		p.idx++
 		return p.Next()
 	}
+	// get the numbers to multiply
 	nums := strings.Split(string(p.mem[p.idx:end]), ",")
 	if len(nums) != 2 {
 		p.idx++
 		return p.Next()
 	}
+	// get the numbers between 1-3 digits
 	n1, ok := atoi(nums[0])
 	if !ok {
 		p.idx++
@@ -54,6 +59,8 @@ func (p *parser) Next() (int, int, bool) {
 	return n1, n2, true
 }
 
+// get the next valid mul instruction
+// if filtering is on, then account for that
 func (p *parser) nextInstruction() bool {
 	enable := true
 	done := false

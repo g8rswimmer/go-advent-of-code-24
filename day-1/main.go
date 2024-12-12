@@ -16,6 +16,7 @@ func main() {
 
 	right, left := []int{}, []int{}
 
+	// seperate the input to right and left
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -27,6 +28,7 @@ func main() {
 		left = append(left, atoi(cols[0]))
 		right = append(right, atoi(cols[len(cols)-1]))
 	}
+	// sort them so you can get the absolute distance bewteen values
 	sort.Ints(left)
 	sort.Ints(right)
 
@@ -38,6 +40,7 @@ func main() {
 		return x
 	}
 
+	// get the distance and sum them, also get the seen values and frequency
 	seen := map[int]int{}
 	for i := range left {
 		ans += abs(left[i] - right[i])
@@ -45,6 +48,7 @@ func main() {
 	}
 	fmt.Printf("The answer is %d\n", ans)
 
+	// get the similarity values and the frequency
 	similarity := 0
 	for _, num := range left {
 		similarity += (num * seen[num])
